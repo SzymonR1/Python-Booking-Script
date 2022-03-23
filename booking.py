@@ -1,4 +1,10 @@
 import sys # might remove - still testing
+import os
+
+i = 0
+
+while os.path.exists(f"file_{i}.dat"):
+    i += 1
 
 
 def menu():
@@ -54,23 +60,31 @@ def make_a_booking():
 
     kids_amount = int(input('How many kids will join the kids club?: '))
 
-    print('Booking Details\n================')
+    print('Booking Details\n===============', file=open(f"file_{i}.dat", "w"))
 
-    print(f'Name: {family_name.capitalize()}')
-    print('Booking ID: ') # not yet implemented - come back later
-    print(f'Accommodation Type: {accommodation_type_name}')
-    print(f'No. of People: {group_size}')
-    print(f'Pool Pass: {family_pool_pass_name}')
-    print(f'No. for kids club: {kids_amount}')
-    print(f'Accommodation cost: {accommodation_cost}')
+    print(f'Surname: {family_name.capitalize()}', file=open(f"file_{i}.dat", "w"))
+    print('Booking ID: ', file=open(f"file_{i}.dat", "w")) # booking id - not yet implemented - come back later
+    print(f'Accommodation Type: {accommodation_type_name}', file=open(f"file_{i}.dat", "w"))
+    print(f'No. of People: {group_size}', file=open(f"file_{i}.dat", "w"))
+    print(f'Pool Pass: {family_pool_pass_name}', file=open(f"file_{i}.dat", "w"))
+    print(f'No. for kids club: {kids_amount}', file=open(f"file_{i}.dat", "w"))
+    print(f'Accommodation cost: {accommodation_cost}', file=open(f"file_{i}.dat", "w"))
 
     total_cost = accommodation_cost + (kids_amount * 100) + family_pool_pass_cost
 
-    print(f'Total cost: {total_cost}')
-
+    print(f'Total cost: {total_cost}', file=open(f"file_{i}.dat", "w"))
 
 
 def review_bookings():
-    print('test')
+    print('LONG ISLAND HOLIDAYS - Review Bookings\n======================================')
+    print(f'Deluxe Caravan: ')
+    print(f'Standard Caravan: ')
+    print(f'Camp Site: \n')
+    print(f'Total no. of pool passes: ')
+    print(f'No. for kids club: ')
+    print(f'Most popular accommodation: ')
+    print(f'Expected income: ')
+    print(f'Average per booking: ')
+    print(f'Number of remaining sites: ')
 
 menu()
