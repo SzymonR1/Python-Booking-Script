@@ -60,19 +60,19 @@ def make_a_booking():
 
     kids_amount = int(input('How many kids will join the kids club?: '))
 
-    print('Booking Details\n===============', file=open(f"file_{i}.dat", "w"))
+    print('Booking Details\n===============', file=open(f"file_{i}.dat", "a"))
 
-    print(f'Surname: {family_name.capitalize()}', file=open(f"file_{i}.dat", "w"))
-    print('Booking ID: ', file=open(f"file_{i}.dat", "w")) # booking id - not yet implemented - come back later
-    print(f'Accommodation Type: {accommodation_type_name}', file=open(f"file_{i}.dat", "w"))
-    print(f'No. of People: {group_size}', file=open(f"file_{i}.dat", "w"))
-    print(f'Pool Pass: {family_pool_pass_name}', file=open(f"file_{i}.dat", "w"))
-    print(f'No. for kids club: {kids_amount}', file=open(f"file_{i}.dat", "w"))
-    print(f'Accommodation cost: {accommodation_cost}', file=open(f"file_{i}.dat", "w"))
+    print(f'Surname: {family_name.capitalize()}', file=open(f"file_{i}.dat", "a"))
+    print('Booking ID: ', file=open(f"file_{i}.dat", "a")) # booking id - not yet implemented - come back later
+    print(f'Accommodation Type: {accommodation_type_name}', file=open(f"file_{i}.dat", "a"))
+    print(f'No. of People: {group_size}', file=open(f"file_{i}.dat", "a"))
+    print(f'Pool Pass: {family_pool_pass_name}', file=open(f"file_{i}.dat", "a"))
+    print(f'No. for kids club: {kids_amount}', file=open(f"file_{i}.dat", "a"))
+    print(f'Accommodation cost: {accommodation_cost}', file=open(f"file_{i}.dat", "a"))
 
     total_cost = accommodation_cost + (kids_amount * 100) + family_pool_pass_cost
 
-    print(f'Total cost: {total_cost}', file=open(f"file_{i}.dat", "w"))
+    print(f'Total cost: {total_cost}', file=open(f"file_{i}.dat", "a"))
 
 
 def review_bookings():
