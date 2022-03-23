@@ -28,28 +28,30 @@ def make_a_booking():
     accommodation_type = int(input('Choose your accommodation type:\n1. Deluxe Caravan\n2. Standard Caravan\n3. Camp Site\n4. No Booking\nChoose an option: '))
 
     if accommodation_type == 1:
-        accommodation_type_name = "Deluxe"
+        accommodation_type_name = 'Deluxe'
         accommodation_cost = 2000
 
     if accommodation_type == 2:
-        accommodation_type_name = "Standard"
+        accommodation_type_name = 'Standard'
         accommodation_cost = 1600
 
     if accommodation_type == 3:
-        accommodation_type_name = "Camp"
+        accommodation_type_name = 'Camp'
         accommodation_cost = 200
 
     if accommodation_type == 4:
         sys.exit(0) # imported - still testing
 
     group_size = int(input('How many people in your group?: '))
-    family_pool_pass = str(input('Do you require a family pool pass? (Y/N): ')) # CHANGE TO 1 = YES 2 = NO (THAT IS CLEANER)
+    family_pool_pass = int(input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: ')) # CHANGE TO 1 = YES 2 = NO (THAT IS CLEANER)
 
-    if family_pool_pass == 'Y':
+    if family_pool_pass == 1:
         family_pool_pass_cost = 100
+        family_pool_pass_name = 'Yes'
     
-    if family_pool_pass == 'N':
+    if family_pool_pass == 2:
         family_pool_pass_cost = 0
+        family_pool_pass_name = 'No'
 
     kids_amount = int(input('How many kids will join the kids club?: '))
 
@@ -59,7 +61,7 @@ def make_a_booking():
     print('Booking ID: ') # not yet implemented - come back later
     print(f'Accommodation Type: {accommodation_type_name}')
     print(f'No. of People: {group_size}')
-    print(f'Pool Pass: {family_pool_pass}')
+    print(f'Pool Pass: {family_pool_pass_name}')
     print(f'No. for kids club: {kids_amount}')
     print(f'Cost of accommodation: {accommodation_cost}')
 
