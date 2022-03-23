@@ -3,8 +3,7 @@ import sys # might remove - still testing
 
 def menu():
     print('LONG ISLAND HOLIDAYS\n=====================')
-    print('1. Make a booking\n2. Review Bookings\n3. Exit\n')
-    user_input = int(input('Choose an option: '))
+    user_input = int(input('1. Make a booking\n2. Review Bookings\n3. Exit\nChoose an option: '))
 
     if user_input == 1:
         make_a_booking()
@@ -43,10 +42,10 @@ def make_a_booking():
         sys.exit(0) # imported - still testing
 
     group_size = int(input('How many people in your group?: '))
-    family_pool_pass = int(input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: ')) # CHANGE TO 1 = YES 2 = NO (THAT IS CLEANER)
+    family_pool_pass = int(input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: '))
 
     if family_pool_pass == 1:
-        family_pool_pass_cost = 100
+        family_pool_pass_cost = 150
         family_pool_pass_name = 'Yes'
     
     if family_pool_pass == 2:
@@ -63,7 +62,7 @@ def make_a_booking():
     print(f'No. of People: {group_size}')
     print(f'Pool Pass: {family_pool_pass_name}')
     print(f'No. for kids club: {kids_amount}')
-    print(f'Cost of accommodation: {accommodation_cost}')
+    print(f'Accommodation cost: {accommodation_cost}')
 
     total_cost = accommodation_cost + (kids_amount * 100) + family_pool_pass_cost
 
