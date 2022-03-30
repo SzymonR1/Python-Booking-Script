@@ -50,6 +50,7 @@ def make_a_booking():
 
 
 # TODO: LOOP THE REMAINING FUNCTIONS
+
     accommodation_type = int(input(
         'Choose your accommodation type:\n1. Deluxe Caravan (€2000)\n2. Standard Caravan (€1600)\n3. Camp Site (€200)\n4. No Booking\nChoose an option: '))
 
@@ -68,19 +69,43 @@ def make_a_booking():
     if accommodation_type == 4:
         sys.exit(0)
 
-    group_size = int(input('How many people in your group?: '))
-    family_pool_pass = int(
-        input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: '))
+    while True:
+        group_size = int(input('How many people in your group?: '))
+        if group_size > 10:
+            print('If you\'re booking a group with 10 or more people, contact us.')
+            continue
 
-    if family_pool_pass == 1:
-        family_pool_pass_cost = 150
-        family_pool_pass_name = 'Yes'
+        if group_size.isdigit():
+            print('try again')
+            continue
 
-    if family_pool_pass == 2:
-        family_pool_pass_cost = 0
-        family_pool_pass_name = 'No'
+        else:
+            break
 
-    kids_amount = int(input('How many kids will join the kids club?: '))
+    while True:
+        family_pool_pass = int(
+            input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: '))
+
+        if family_pool_pass == 1:
+            family_pool_pass_cost = 150
+            family_pool_pass_name = 'Yes'
+            continue
+
+        if family_pool_pass == 2:
+            family_pool_pass_cost = 0
+            family_pool_pass_name = 'No'
+            continue
+
+        else:
+            break
+
+    while True:
+        kids_amount = int(input('How many kids will join the kids club?: '))
+        if kids_amount >= group_size:
+            print('Enter a valid number.')
+            continue
+        else:
+            break
 
     total_cost = accommodation_cost + \
         (kids_amount * 100) + family_pool_pass_cost
@@ -92,7 +117,7 @@ def make_a_booking():
 
 
 def review_bookings():
-    # FIXME: - need to implement something similar to Q3 from Week 7 to get this to work
+    # TODO: - need to implement something similar to Q3 from Week 7 to get this to work
     input('Test')
 
 
