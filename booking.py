@@ -7,20 +7,31 @@ i = 0
 
 def menu():
     print('LONG ISLAND HOLIDAYS\n=====================')
-    user_input = int(
-        input('1. Make a booking\n2. Review Bookings\n3. Exit\nChoose an option: '))
 
-    if user_input == 1:
-        make_a_booking()
+    # TODO: Work on this loop, if the input is incorrect only print the choose an option field, not the whole thing
 
-    if user_input == 2:
-        review_bookings()
+    while True:
+        try:
+            user_input = int(
+                input('1. Make a booking\n2. Review Bookings\n3. Exit\nChoose an option: '))
 
-    if user_input == 3:
-        sys.exit(0)
+            if user_input > 3 or user_input < 0:
+                print('Enter a valid option (1-3)')
+                continue
 
-    else:
-        menu()
+            if user_input == 1:
+                make_a_booking()
+                break
+
+            if user_input == 2:
+                review_bookings()
+                break
+
+            if user_input == 3:
+                sys.exit(0)
+                break
+        except ValueError:
+            print('Enter a valid option (1-3)')
 
 
 def make_a_booking():
@@ -29,55 +40,75 @@ def make_a_booking():
 
     family_pool_pass_cost = 0
 
-    # TODO: - need to append output into text files
-
     print('LONG ISLAND HOLIDAYS - Making a Booking\n========================================')
+
+    # TODO: This loops correctly
+
     while True:
         surname = str(input('Enter your surname: '))
         if len(surname) >= 15 or len(surname) <= 0:
             print('Enter a valid surname (1-15) characters long.')
             continue
+        if not surname.isalpha():
+            print('Your surname cannot contain any numbers.')
+            continue
         else:
             break
 
+    # TODO: This loops correctly
+
     while True:
         phone_number = str(input('Enter your phone number: '))
-        if len(phone_number) >= 12 or phone_number.isupper() or phone_number.islower():
+        if len(phone_number) >= 12 or len(phone_number) <= 0 or phone_number.isupper() or phone_number.islower():
             print('Phone number is too long, or it contains a letter.')
             continue
         else:
             break
 
-
-# TODO: LOOP THE REMAINING FUNCTIONS
-
-    accommodation_type = int(input(
-        'Choose your accommodation type:\n1. Deluxe Caravan (€2000)\n2. Standard Caravan (€1600)\n3. Camp Site (€200)\n4. No Booking\nChoose an option: '))
-
-    if accommodation_type == 1:
-        accommodation_type_name = 'Deluxe'
-        accommodation_cost = 2000
-
-    if accommodation_type == 2:
-        accommodation_type_name = 'Standard'
-        accommodation_cost = 1600
-
-    if accommodation_type == 3:
-        accommodation_type_name = 'Camp'
-        accommodation_cost = 200
-
-    if accommodation_type == 4:
-        sys.exit(0)
+    # TODO: Work on this loop, if the input is incorrect only print the choose an option field, not the whole thing
 
     while True:
-        group_size = int(input('How many people in your group?: '))
-        if group_size > 10:
-            print('If you\'re booking a group with 10 or more people, contact us.')
-            continue
+        try:
+            accommodation_type = int(input(
+                'Choose your accommodation type:\n1. Deluxe Caravan (€2000)\n2. Standard Caravan (€1600)\n3. Camp Site (€200)\n4. No Booking\nChoose an option: '))
 
-        if group_size.isdigit():
-            print('try again')
-            continue
+            if accommodation_type > 4 or accommodation_type < 0:
+                print('Enter a valid option (1-4)')
+                continue
+
+            if accommodation_type == 1:
+                accommodation_type_name = 'Deluxe'
+                accommodation_cost = 2000
+                break
+
+            if accommodation_type == 2:
+                accommodation_type_name = 'Standard'
+                accommodation_cost = 1600
+                break
+
+            if accommodation_type == 3:
+                accommodation_type_name = 'Camp'
+                accommodation_cost = 200
+                break
+
+            if accommodation_type == 4:
+                sys.exit(0)
+                break
+
+        except ValueError:
+            print('Enter a valid input (1-4)')
+
+    # TODO: This loops correctly
+
+    while True:
+        try:
+            group_size = int(input('How many people in your group?: '))
+            if group_size > 10:
+                print(
+                    'If you\'re booking for a group of 10 or more people, please contact us.')
+                continue
+        except ValueError:
+            print('This input has to be a number.')
 
         else:
             break
@@ -89,15 +120,15 @@ def make_a_booking():
         if family_pool_pass == 1:
             family_pool_pass_cost = 150
             family_pool_pass_name = 'Yes'
-            continue
+            break
 
         if family_pool_pass == 2:
             family_pool_pass_cost = 0
             family_pool_pass_name = 'No'
-            continue
+            break
 
         else:
-            break
+            continue
 
     while True:
         kids_amount = int(input('How many kids will join the kids club?: '))
