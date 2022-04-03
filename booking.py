@@ -8,8 +8,6 @@ i = 0
 def menu():
     print('LONG ISLAND HOLIDAYS\n=====================')
 
-    # TODO: Work on this loop, if the input is incorrect only print the choose an option field, not the whole thing
-
     while True:
         try:
             user_input = int(
@@ -42,8 +40,6 @@ def make_a_booking():
 
     print('LONG ISLAND HOLIDAYS - Making a Booking\n========================================')
 
-    # TODO: This loops correctly
-
     while True:
         surname = str(input('Enter your surname: '))
         if len(surname) >= 15 or len(surname) <= 0:
@@ -55,8 +51,6 @@ def make_a_booking():
         else:
             break
 
-    # TODO: This loops correctly
-
     while True:
         phone_number = str(input('Enter your phone number: '))
         if len(phone_number) >= 12 or len(phone_number) <= 0 or phone_number.isupper() or phone_number.islower():
@@ -64,8 +58,6 @@ def make_a_booking():
             continue
         else:
             break
-
-    # TODO: Work on this loop, if the input is incorrect only print the choose an option field, not the whole thing
 
     while True:
         try:
@@ -98,8 +90,6 @@ def make_a_booking():
         except ValueError:
             print('Enter a valid input (1-4)')
 
-    # TODO: This loops correctly
-
     while True:
         try:
             group_size = int(input('How many people in your group?: '))
@@ -114,27 +104,38 @@ def make_a_booking():
             break
 
     while True:
-        family_pool_pass = int(
-            input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: '))
+        try:
+            family_pool_pass = int(
+                input('Do you require a family pool pass?:\n1. Yes\n2. No\nChoose an option: '))
 
-        if family_pool_pass == 1:
-            family_pool_pass_cost = 150
-            family_pool_pass_name = 'Yes'
-            break
+            if family_pool_pass == 1:
+                family_pool_pass_cost = 150
+                family_pool_pass_name = 'Yes'
+                break
 
-        if family_pool_pass == 2:
-            family_pool_pass_cost = 0
-            family_pool_pass_name = 'No'
-            break
+            if family_pool_pass == 2:
+                family_pool_pass_cost = 0
+                family_pool_pass_name = 'No'
+                break
+        except ValueError:
+            print('Enter a valid option (1-2)')
 
         else:
             continue
 
     while True:
-        kids_amount = int(input('How many kids will join the kids club?: '))
-        if kids_amount >= group_size:
+        try:
+            kids_amount = int(
+                input('How many kids will join the kids club?: '))
+            if kids_amount >= group_size:
+                print(
+                    'The number of kids cannot be more than the number of people in your group.')
+                continue
+            if kids_amount < 0:
+                print('The number of kids cannot be negative.')
+                continue
+        except ValueError:
             print('Enter a valid number.')
-            continue
         else:
             break
 
@@ -149,7 +150,17 @@ def make_a_booking():
 
 def review_bookings():
     # TODO: - need to implement something similar to Q3 from Week 7 to get this to work
-    input('Test')
+    print('LONG ISLAND HOLIDAYS - Review Bookings\n========================================')
+    print(f'Deluxe Caravan: ')
+    print(f'Standard Caravan: ')
+    print(f'Camp Site: ')
+    print('')
+    print(f'Total no. of Pool Passes: ')
+    print(f'Total no. of Kids joining Kids Club: ')
+    print(f'Most popular accomodation: ')
+    print(f'Excpected income: ')
+    print(f'Average per booking: ')
+    print(f'Number of remaining sites: ')
 
 
 menu()
