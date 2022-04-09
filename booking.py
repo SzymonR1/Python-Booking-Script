@@ -11,7 +11,7 @@ def read_data():
         item_in_line = line.strip().split(',')
         accommodation.append(item_in_line[0])
         prices.append(item_in_line[1])
-        bookings.append(item_in_line[2])
+        bookings.append(int(item_in_line[2]))
 
     return accommodation, prices, bookings
 
@@ -23,8 +23,8 @@ def read_extras():
     kids_camp_line = lines[0].split(',')
     pool_pass_line = lines[1].split(',')
 
-    kids_camp = kids_camp_line[1]
-    pool_pass = pool_pass_line[1]
+    kids_camp = int(kids_camp_line[1])
+    pool_pass = int(pool_pass_line[1])
 
     return kids_camp, pool_pass
 
@@ -34,14 +34,14 @@ def write_data(accommodation, prices, bookings):
 
     for i, items in enumerate(accommodation):
         bookings_write.write(
-            f"{accommodation[i]}, {prices[i]}, {bookings[i]}\n")
+            f"{accommodation[i]},{prices[i]},{bookings[i]}\n")
     bookings_write.close()
 
 
 def write_extras(kids_camp, pool_pass):
     extras_write = open("extras.txt", "w")
 
-    extras_write.write(f"Kids Camp, {kids_camp} Pool Pass, {pool_pass}")
+    extras_write.write(f"Kids Camp,{kids_camp}\nPool Pass,{pool_pass}")
     extras_write.close()
 
 
@@ -62,21 +62,20 @@ def menu():
                 kids_camp, pool_pass = read_extras()
                 make_a_booking(accommodation, prices,
                                bookings, kids_camp, pool_pass)
-                break
 
             if user_input == 2:
                 review_bookings()
-                break
 
             if user_input == 3:
                 sys.exit(0)
-                break
 
         except ValueError:
             print('Enter a valid option (1-3)')
 
 
 def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
+
+    i = 1 + bookings[0] + bookings[1] + bookings[2]
 
     accommodation_cost = 0
 
@@ -115,21 +114,23 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
             if accommodation_type == 1:
                 accommodation_type_name = 'Deluxe'
                 accommodation_cost = 2000
+                bookings[0] = bookings[0] + 1
                 break
 
             if accommodation_type == 2:
                 accommodation_type_name = 'Standard'
                 accommodation_cost = 1600
+                bookings[1] = bookings[1] + 1
                 break
 
             if accommodation_type == 3:
                 accommodation_type_name = 'Camp'
                 accommodation_cost = 200
+                bookings[2] = bookings[2] + 1
                 break
 
             if accommodation_type == 4:
                 sys.exit(0)
-                break
 
         except ValueError:
             print('Enter a valid input (1-4)')
@@ -140,6 +141,9 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
             if group_size > 10:
                 print(
                     'If you\'re booking for a group of 10 or more people, please contact us.')
+                continue
+            if group_size <= 0:
+                print('Enter a valid amount (1-10): ')
                 continue
 
         except ValueError:
@@ -156,6 +160,7 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
             if family_pool_pass == 1:
                 family_pool_pass_cost = 150
                 family_pool_pass_name = 'Yes'
+                pool_pass = pool_pass + 1
                 break
 
             if family_pool_pass == 2:
@@ -185,6 +190,7 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
             print('Enter a valid number.')
 
         else:
+            kids_camp = kids_camp + kids_amount
             break
 
     total_cost = accommodation_cost + \
@@ -192,12 +198,11 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
 
     file_name = surname + '_'
 
-    i = 0
-
     print(f'Booking Details\n===============\nSurname: {surname.capitalize()}\nBooking ID: {i}\nAccommodation type: {accommodation_type_name}\nNo. of people: {group_size}\nPool Pass: {family_pool_pass_name}\nKids joining kids club: {kids_amount}\nPhone number: {phone_number}\nAccommodation cost: {accommodation_cost} EUR\nTotal cost: {total_cost} EUR', file=open(
-        f'{file_name+str(i)}.txt', 'a'))
+        f'{file_name}{i:02}.txt', 'a'))
 
-    menu()
+    write_data(accommodation, prices, bookings)
+    write_extras(kids_camp, pool_pass)
 
 
 def review_bookings():
@@ -217,7 +222,6 @@ def review_bookings():
 
 def main():
     menu()
-    write_data(accommodation, prices, bookings)
 
 
 main()

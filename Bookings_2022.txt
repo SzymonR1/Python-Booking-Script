@@ -1,3 +1,3 @@
 Deluxe Caravan,2000,0
-Standard Caravan,1600,0
+Standard Caravan,1600,1
 Camp,200,0
