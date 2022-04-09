@@ -64,7 +64,9 @@ def menu():
                                bookings, kids_camp, pool_pass)
 
             if user_input == 2:
-                review_bookings()
+                accommodation, prices, bookings = read_data()
+                kids_camp, pool_pass = read_extras()
+                review_bookings(bookings, accommodation, kids_camp, pool_pass)
 
             if user_input == 3:
                 sys.exit(0)
@@ -80,6 +82,10 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
     accommodation_cost = 0
 
     family_pool_pass_cost = 0
+
+    if i > 30:
+        print('Sorry, there are no more sites available')
+        menu()
 
     print('LONG ISLAND HOLIDAYS - Making a Booking\n========================================')
 
@@ -205,19 +211,26 @@ def make_a_booking(accommodation, prices, bookings, kids_camp, pool_pass):
     write_extras(kids_camp, pool_pass)
 
 
-def review_bookings():
-    # TODO: - need to implement something similar to Q3 from Week 7 to get this to work
+def review_bookings(bookings, accommodation, kids_camp, pool_pass):
+    expected_income = (bookings[0] * 2000) + (bookings[1] * 1600) + (bookings[2] * 200) + \
+        (kids_camp * 100) + (pool_pass * 150)
+    booking_amount = bookings[0] + bookings[1] + bookings[2]
+    avg_income = expected_income / booking_amount
+    remaining_sites = 30 - (bookings[0] + bookings[1] + bookings[2])
+    most_booked = max(bookings)
+    most_popular = bookings.index(most_booked)
     print('LONG ISLAND HOLIDAYS - Review Bookings\n=======================================')
-    print(f'Deluxe Caravan: ')
-    print(f'Standard Caravan: ')
-    print(f'Camp Site: ')
+    print(f'Deluxe Caravan: {bookings[0]}')
+    print(f'Standard Caravan: {bookings[1]}')
+    print(f'Camp Site: {bookings[2]}')
     print('')  # blank line spacer
-    print(f'Total no. of Pool Passes: ')
-    print(f'Total no. of Kids joining Kids Club: ')
-    print(f'Most popular accomodation: ')
-    print(f'Excpected income: ')
-    print(f'Average per booking: ')
-    print(f'Number of remaining sites: ')
+    print(f'Total no. of Pool Passes: {pool_pass}')
+    print(f'Total no. of Kids joining Kids Club: {kids_camp}')
+    print(f'Expected income: {expected_income}')
+    print(f'Average per booking: {avg_income}')
+    print(f'Number of remaining sites: {remaining_sites}')
+    if booking_amount >= 5:
+        print(f'Most popular: {accommodation[most_popular]}')
 
 
 def main():
